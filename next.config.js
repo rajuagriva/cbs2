@@ -1,12 +1,17 @@
 module.exports = {
   async rewrites() {
-    return [
-      {
-        // Apapun yang Anda ketik di belakang domain kita...
-        source: '/:path*',
-        // ...akan dicarikan isinya ke website kantor
-        destination: 'https://apps.kgsplantation.com/:path*',
-      },
-    ]
+    return {
+      // "beforeFiles" artinya: Lakukan jembatan INI DULU sebelum cek file lokal
+      beforeFiles: [
+        {
+          source: '/',
+          destination: 'https://apps.kgsplantation.com/',
+        },
+        {
+          source: '/:path*',
+          destination: 'https://apps.kgsplantation.com/:path*',
+        },
+      ],
+    }
   },
 }
